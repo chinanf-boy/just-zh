@@ -69,7 +69,7 @@ If you need help with `just` please feel free to open an issue or let me know on
 
 On Windows, `just` works with the `sh` provided by [Git for Windows](https://git-scm.com), [GitHub Desktop](https://desktop.github.com), and [Cygwin](http://www.cygwin.com).
 
-### [](#pre-built-binaries)Pre-built Binaries
+### built-binaries)Pre-built Binaries
 
 Pre-built binaries for Linux, MacOS, and Windows can be found on [the releases page](https://github.com/casey/just/releases).
 
@@ -83,19 +83,19 @@ On Linux, use:
 curl -LSfs https://japaric.github.io/trust/install.sh | \\
   sh -s -- --git casey/just --target x86\_64-unknown-linux-musl --to DESTINATION\_DIRECTORY
 
-### [](#homebrew)Homebrew
+### Homebrew
 
 On MacOS, `just` can be installed using the [Homebrew package manager](https://brew.sh). Install Homebrew using the instructions [here](https://brew.sh), then run:
 
 `brew install just`
 
-### [](#scoop)Scoop
+### Scoop
 
 On Windows, `just` can be installed using the [Scoop package manager](https://scoop.sh). Install Scoop using the instractions [here](https://scoop.sh/), then run:
 
 scoop install just
 
-### [](#cargo)Cargo
+### Cargo
 
 On Windows, Linux, and macOS, `just` can be installed using Cargo, the [rust language package manager](https://www.rust-lang.org). Install Cargo using the instructions [here](https://www.rustup.rs), then run:
 
@@ -169,7 +169,7 @@ testing... all tests passed!
 
 ## [](#features)Features
 
-### [](#listing-available-recipes)Listing Available Recipes
+### available-recipes)Listing Available Recipes
 
 Recipes can be listed with `just --list` :
 
@@ -185,7 +185,7 @@ Available recipes:
 $ just --summary
 build test deploy lint
 
-### [](#documentation-comments)Documentation Comments
+### comments)Documentation Comments
 
 Comments immediately preceding a recipe will appear in `just --list`:
 
@@ -202,7 +202,7 @@ Available recipes:
     build # build stuff
     test # test stuff
 
-### [](#variables-and-substitution)Variables and Substitution
+### and-substitution)Variables and Substitution
 
 Variables, strings, concatenation, and substitution using `{{…​}}` are supported:
 
@@ -218,7 +218,7 @@ publish:
     scp {{tarball}} me@server.com:release/
     rm -rf {{tarball}} {{tardir}}
 
-#### [](#escaping-)Escaping `{{`
+#### )Escaping `{{`
 
 To write a recipe containing `{{`, use `{{ "{{" }}`:
 
@@ -232,7 +232,7 @@ Another option is to put all the text you’d like to escape inside of an interp
 braces:
 	echo '{{'I {{LOVE}} curly braces!'}}'
 
-### [](#strings)Strings
+### Strings
 
 Double-quoted strings support escape sequences:
 
@@ -273,11 +273,11 @@ is
 string!
 "
 
-### [](#functions)Functions
+### Functions
 
 Just provides a few built-in functions that might be useful when writing recipes.
 
-#### [](#system-information)System Information
+#### information)System Information
 
 *   `arch()` – Instruction set architecture. Possible values are: `"aarch64"`, `"arm"`, `"asmjs"`, `"hexagon"`, `"mips"`, `"msp430"`, `"powerpc"`, `"powerpc64"`, `"s390x"`, `"sparc"`, `"wasm32"`, `"x86"`, `"x86_64"`, and `"xcore"`.
     
@@ -296,14 +296,14 @@ $ just system-info
 This is an x86_64 machine
 ```
 
-#### [](#environment-variables)Environment Variables
+#### variables)Environment Variables
 
 *   `env_var(key)` – Retrieves the environment variable with name `key`, aborting if it is not present.
     
 *   `env_var_or_default(key, default)` – Retrieves the environment variable with name `key`, returning `default` if it is not present.
     
 
-#### [](#invocation-directory)Invocation Directory
+#### directory)Invocation Directory
 
 *   `invocation_directory()` - Retrieves the path of the current working directory, before `just` changed it (chdir’d) prior to executing commands.
     
@@ -322,7 +322,7 @@ build:
     cd {{invocation_directory()}}; ./some_script_that_needs_to_be_run_from_here
 ```
 
-#### [](#dotenv-integration)Dotenv Integration
+#### integration)Dotenv Integration
 
 `just` will load environment variables from a file named `.env`. This file can be located in the same directory as your justfile or in a parent directory. These variables are environment variables, not `just` variables, and so must be accessed using `$VARIABLE_NAME` in recipes and backticks.
 
@@ -346,7 +346,7 @@ $ just serve
 Starting server with database localhost:6379 on port 1337...
 ./server --database $DATABASE\_ADDRESS --port $SERVER\_PORT
 
-### [](#command-evaluation-using-backticks)Command Evaluation Using Backticks
+### evaluation-using-backticks)Command Evaluation Using Backticks
 
 Backticks can be used to store the result of commands:
 
@@ -355,7 +355,7 @@ localhost = \`dumpinterfaces | cut -d: -f2 | sed 's/\\/.\*//' | sed 's/ //g'\`
 serve:
     ./serve {{localhost}} 8080
 
-### [](#setting-variables-from-the-command-line)Setting Variables from the Command Line
+### variables-from-the-command-line)Setting Variables from the Command Line
 
 Variables can be overridden from the command line.
 
@@ -383,7 +383,7 @@ $ just --set os bsd
 ./build bsd
 ./test --test bsd
 
-### [](#environment-variables-1)Environment Variables
+### variables-1)Environment Variables
 
 Assignments prefixed with the `export` keyword will be exported to recipes as environment variables:
 
@@ -393,7 +393,7 @@ test:
     # will print a stack trace if it crashes
     cargo test
 
-### [](#recipe-parameters)Recipe Parameters
+### parameters)Recipe Parameters
 
 Recipes may have parameters. Here recipe `build` has a parameter called `target`:
 
@@ -460,7 +460,7 @@ You can fix this by adding quotes:
 search QUERY:
     lynx 'https://www.google.com/?q={{QUERY}}'
 
-### [](#writing-recipes-in-other-languages)Writing Recipes in Other Languages
+### recipes-in-other-languages)Writing Recipes in Other Languages
 
 Recipes that start with a `#!` are executed as scripts, so you can write recipes in other languages:
 
@@ -494,7 +494,7 @@ Larry Wall says Hi!
 Yo from a shell script!
 Hello from ruby!
 
-### [](#command-line-options)Command Line Options
+### line-options)Command Line Options
 
 `just` supports a number of useful command line options for listing, dumping, and debugging recipes and variable:
 
@@ -514,7 +514,7 @@ polyglot: python js perl sh ruby
 
 Run `just --help` to see all the options.
 
-### [](#private-recipes)Private Recipes
+### recipes)Private Recipes
 
 Recipes whose name starts with a `_` are omitted from `just --list`:
 
@@ -535,7 +535,7 @@ test
 
 This is useful for helper recipes which are only meant to be used as dependencies of other recipes.
 
-### [](#quiet-recipes)Quiet Recipes
+### recipes)Quiet Recipes
 
 A recipe name may be prefixed with '@' to invert the meaning of '@' before each line:
 
@@ -551,7 +551,7 @@ hello
 goodbye
 # all done!
 
-### [](#invoking-justfiles-in-other-directories)Invoking Justfiles in Other Directories
+### justfiles-in-other-directories)Invoking Justfiles in Other Directories
 
 If the first argument passed to `just` contains a `/`, then the following occurs:
 
@@ -572,7 +572,7 @@ $ just foo/
 
 ## [](#frequently-asked-questions)Frequently Asked Questions
 
-### [](#what-are-the-idiosyncrasies-of-make-that-just-avoids)What are the idiosyncrasies of make that just avoids?
+### are-the-idiosyncrasies-of-make-that-just-avoids)What are the idiosyncrasies of make that just avoids?
 
 Make has some behaviors which are either confusing, complicated, or make it unsuitable for use as a general command runner.
 
@@ -592,7 +592,7 @@ To be fair, this behavior is desirable when using make as a build system, but no
 
 Some other examples include having to understand the difference between `=` and `:=` assignment, the confusing error messages that can be produced if you mess up your makefile, having to use `$$` to write recipes that use environment variables, and incompatibilites between different flavors of make.
 
-### [](#whats-the-relationship-between-just-and-cargo-build-scripts)What’s the relationship between just and cargo build scripts?
+### the-relationship-between-just-and-cargo-build-scripts)What’s the relationship between just and cargo build scripts?
 
 [Cargo build scripts](http://doc.crates.io/build-script.html) have a pretty specific use, which is to control how cargo builds your rust project. This might include adding flags to `rustc` invocations, building an external dependency, or running some kind of codegen step.
 
@@ -602,22 +602,22 @@ Also, although `just` is written in rust, it can be used regardless of the langu
 
 ## [](#miscellanea)Miscellanea
 
-### [](#companion-tools)Companion Tools
+### tools)Companion Tools
 
 Tools that pair nicely with `just` include:
 
 *   [`watchexec`](https://github.com/mattgreen/watchexec) — a simple tool that watches a path and runs a command whenever it detects modifications.
     
 
-### [](#shell-alias)Shell Alias
+### alias)Shell Alias
 
 For lightning-fast command running, put `alias j=just` in your shell’s configuration file.
 
-### [](#syntax-highlighting)Syntax Highlighting
+### highlighting)Syntax Highlighting
 
 `justfile` syntax is close enough to `make` that you may want to tell your editor to use make syntax highlighting for just.
 
-#### [](#vim)Vim
+#### Vim
 
 For vim, you can put the following in `~/.vim/filetype.vim`:
 
@@ -631,7 +631,7 @@ augroup filetypedetect
 augroup END
 ```
 
-#### [](#vim-and-emacs)Vim and Emacs
+#### and-emacs)Vim and Emacs
 
 Include the following in a `justfile` to enable syntax highlighting in vim and emacs:
 
@@ -642,7 +642,7 @@ Include the following in a `justfile` to enable syntax highlighting in vim and e
 # vim: set ft=make :
 ```
 
-#### [](#visual-studio-code)Visual Studio Code
+#### studio-code)Visual Studio Code
 
 An extension for VS Code by [skellock](https://github.com/skellock) is [available here](https://marketplace.visualstudio.com/items?itemName=skellock.just). ([repository](https://github.com/skellock/vscode-just))
 
@@ -652,23 +652,23 @@ You can install it from the command line by running:
 code --install-extension skellock.just
 ```
 
-#### [](#kakoune)Kakoune
+#### Kakoune
 
 Kakoune supports `justfile` syntax highlighting out of the box, thanks to TeddyDD.
 
-#### [](#other-editors)Other Editors
+#### editors)Other Editors
 
 Feel free to send me the commands necessary to get syntax highlighting working in your editor of choice so that I may include them here.
 
-### [](#grammar)Grammar
+### Grammar
 
 A non-normative grammar of justfiles can be found in [GRAMMAR.md](/casey/just/blob/master/GRAMMAR.md).
 
-### [](#justsh)just.sh
+### just.sh
 
 Before `just` was a fancy rust program it was a tiny shell script that called `make`. You can find the old version in [extras/just.sh](/casey/just/blob/master/extras/just.sh).
 
-### [](#non-project-specific-justfile)Non-Project Specific Justfile
+### project-specific-justfile)Non-Project Specific Justfile
 
 If you want some commands to be available everwhere, put them in `~/.justfile` and add the following to your shell’s initialization file:
 
