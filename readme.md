@@ -21,10 +21,9 @@
 <!-- repo = 'casey/just' -->
 <!-- commit = '1ad3f996366a515ac4124ad44e1db7bba145884c' -->
 <!-- time = '2018-11-06' -->
-
-| 翻译的原文 | 与日期        | 最新更新 | 更多                       |
-| ---------- | ------------- | -------- | -------------------------- |
-| [commit]   | ⏰ 2018-11-06 | ![last]  | [中文翻译][translate-list] |
+翻译的原文 | 与日期 | 最新更新 | 更多
+---|---|---|---
+[commit] | ⏰ 2018-11-06 | ![last] | [中文翻译][translate-list]
 
 [last]: https://img.shields.io/github/last-commit/casey/just.svg
 [commit]: https://github.com/casey/just/tree/1ad3f996366a515ac4124ad44e1db7bba145884c
@@ -37,7 +36,7 @@
 
 ## 生活
 
-[help me live , live need money 💰](https://github.com/chinanf-boy/live-need-money)
+[If help, **buy** me coffee —— 营养跟不上了，给我来瓶营养快线吧! 💰](https://github.com/chinanf-boy/live-need-money)
 
 ---
 
