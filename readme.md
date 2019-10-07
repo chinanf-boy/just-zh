@@ -15,12 +15,12 @@
 
 ---
 
-## 校对 ✅
+## 更新 中
 
 <!-- doc-templite START generated -->
 <!-- repo = 'casey/just' -->
-<!-- commit = '1ad3f996366a515ac4124ad44e1db7bba145884c' -->
-<!-- time = '2018-11-06' -->
+<!-- commit = 'ab11740104a6c4f545bc1b35a1bc002044e0fd59' -->
+<!-- time = '2019-10-07' -->
 翻译的原文 | 与日期 | 最新更新 | 更多
 ---|---|---|---
 [commit] | ⏰ 2018-11-06 | ![last] | [中文翻译][translate-list]

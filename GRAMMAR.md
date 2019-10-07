@@ -41,6 +41,7 @@ grammar
 justfile      : item* EOF
 
 item          : recipe
+              | alias
               | assignment
               | export
               | eol
@@ -48,27 +49,29 @@ item          : recipe
 eol           : NEWLINE
               | COMMENT NEWLINE
 
-assignment    : NAME '=' expression eol
+alias         : 'alias' NAME ':=' NAME
+
+assignment    : NAME ':=' expression eol
 
 export        : 'export' assignment
 
 expression    : value '+' expression
               | value
 
-value         : NAME '(' arguments? ')'
+value         : NAME '(' sequence? ')'
               | STRING
               | RAW_STRING
               | BACKTICK
               | NAME
+              | '(' expression ')'
 
-arguments     : expression ',' arguments
+sequence      : expression ',' sequence
               | expression ','?
 
 recipe        : '@'? NAME parameter* ('+' parameter)? ':' dependencies? body?
 
 parameter     : NAME
-              | NAME '=' STRING
-              | NAME '=' RAW_STRING
+              | NAME '=' value
 
 dependencies  : NAME+
 
