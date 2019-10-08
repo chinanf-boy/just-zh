@@ -15,7 +15,7 @@
 
 ---
 
-## 更新 中
+## 更新 ✅
 
 <!-- doc-templite START generated -->
 <!-- repo = 'casey/just' -->
@@ -23,10 +23,10 @@
 <!-- time = '2019-10-07' -->
 翻译的原文 | 与日期 | 最新更新 | 更多
 ---|---|---|---
-[commit] | ⏰ 2018-11-06 | ![last] | [中文翻译][translate-list]
+[commit] | ⏰ 2019-10-07 | ![last] | [中文翻译][translate-list]
 
 [last]: https://img.shields.io/github/last-commit/casey/just.svg
-[commit]: https://github.com/casey/just/tree/1ad3f996366a515ac4124ad44e1db7bba145884c
+[commit]: https://github.com/casey/just/tree/ab11740104a6c4f545bc1b35a1bc002044e0fd59
 
 <!-- doc-templite END generated -->
 
@@ -54,10 +54,14 @@
     - [预先构建的 二进制文件](#%E9%A2%84%E5%85%88%E6%9E%84%E5%BB%BA%E7%9A%84-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6)
     - [Homebrew](#homebrew)
     - [Scoop](#scoop)
-    - [Cargo](#cargo)
-  - [让我们快速开始](#%E8%AE%A9%E6%88%91%E4%BB%AC%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)
+  - [Arch Linux](#arch-linux)
+  - [Void Linux](#void-linux)
+  - [Nix](#nix)
+  - [Cargo](#cargo)
+- [让我们快速开始](#%E8%AE%A9%E6%88%91%E4%BB%AC%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)
   - [特性](#%E7%89%B9%E6%80%A7)
     - [列出可用的配方](#%E5%88%97%E5%87%BA%E5%8F%AF%E7%94%A8%E7%9A%84%E9%85%8D%E6%96%B9)
+  - [Aliases](#aliases)
     - [文档注释](#%E6%96%87%E6%A1%A3%E6%B3%A8%E9%87%8A)
     - [变量和替代](#%E5%8F%98%E9%87%8F%E5%92%8C%E6%9B%BF%E4%BB%A3)
       - [转义 `{{`](#%E8%BD%AC%E4%B9%89-)
@@ -72,13 +76,15 @@
     - [环境变量](#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F-1)
     - [配方 参数](#%E9%85%8D%E6%96%B9-%E5%8F%82%E6%95%B0)
     - [用其他语言来写配方](#%E7%94%A8%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E6%9D%A5%E5%86%99%E9%85%8D%E6%96%B9)
+  - [多行结构语句](#%E5%A4%9A%E8%A1%8C%E7%BB%93%E6%9E%84%E8%AF%AD%E5%8F%A5)
+    - [`if` statements](#if-statements)
+    - [`for` loops](#for-loops)
+    - [`while` loops](#while-loops)
     - [命令行选项](#%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%80%89%E9%A1%B9)
     - [私有配方](#%E7%A7%81%E6%9C%89%E9%85%8D%E6%96%B9)
     - [安静配方](#%E5%AE%89%E9%9D%99%E9%85%8D%E6%96%B9)
     - [在其他目录调用 Justfiles](#%E5%9C%A8%E5%85%B6%E4%BB%96%E7%9B%AE%E5%BD%95%E8%B0%83%E7%94%A8-justfiles)
-  - [FAQ](#faq)
-    - [make 的什么特性，just 避免了？](#make-%E7%9A%84%E4%BB%80%E4%B9%88%E7%89%B9%E6%80%A7just-%E9%81%BF%E5%85%8D%E4%BA%86)
-    - [just 和 cargo build 脚本有一腿吗?](#just-%E5%92%8C-cargo-build-%E8%84%9A%E6%9C%AC%E6%9C%89%E4%B8%80%E8%85%BF%E5%90%97)
+  - [Just 脚本](#just-%E8%84%9A%E6%9C%AC)
   - [杂记(炸鸡?)](#%E6%9D%82%E8%AE%B0%E7%82%B8%E9%B8%A1)
     - [搭配工具](#%E6%90%AD%E9%85%8D%E5%B7%A5%E5%85%B7)
     - [Shell Alias(别名)](#shell-alias%E5%88%AB%E5%90%8D)
@@ -91,6 +97,10 @@
     - [语法](#%E8%AF%AD%E6%B3%95)
     - [just.sh](#justsh)
     - [无定向项目的 Justfile](#%E6%97%A0%E5%AE%9A%E5%90%91%E9%A1%B9%E7%9B%AE%E7%9A%84-justfile)
+  - [Janus](#janus)
+  - [FAQ](#faq)
+    - [make 的什么不良癖好，just 避免了？](#make-%E7%9A%84%E4%BB%80%E4%B9%88%E4%B8%8D%E8%89%AF%E7%99%96%E5%A5%BDjust-%E9%81%BF%E5%85%8D%E4%BA%86)
+    - [just 和 cargo build 脚本有一腿吗?](#just-%E5%92%8C-cargo-build-%E8%84%9A%E6%9C%AC%E6%9C%89%E4%B8%80%E8%85%BF%E5%90%97)
   - [进一步漫谈](#%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%BC%AB%E8%B0%88)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -101,11 +111,14 @@
 
 # `just`
 
-[![crates.io version](https://img.shields.io/crates/v/just.svg)](https://crates.io/crates/just) [![build status](https://travis-ci.org/casey/just.svg?branch=master)](https://travis-ci.org/casey/just) [![chat on gitter](https://badges.gitter.im/just-because/Lobby.svg)](https://gitter.im/just-because/Lobby) [![say thanks](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/casey)
+![crates.io version](https://img.shields.io/crates/v/just.svg) ![build
+status](https://travis-ci.org/casey/just.svg?branch=master) ![chat on
+gitter](https://badges.gitter.im/just-because/Lobby.svg) ![say
+thanks](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)
 
 `just`是保存和运行项目的特定命令的简便方法。
 
-命令存储在一个名为`justfile`或`Justfile`，语法启发`make`:
+命令存储在一个名为`justfile`，语法启发自`make`:
 
 ```make
 build:
@@ -123,7 +136,7 @@ test TEST: build
 然后可以使用`just <COMMAND>`运行它们:
 
 ```sh
-$ just test
+$ just test-all
 cc *.c -o main
 ./test --all
 Yay, all your tests passed!
@@ -131,30 +144,30 @@ Yay, all your tests passed!
 
 > 有些困惑，没事，下面就帮你理清一切
 
-`just`产生详细的错误消息,并避免`make`的特性,因此调试一个 justfile 比调试一个 markfile 文件更容易,也更少惊吓.
+`just`产生详细的错误消息，并避免`make`不良癖好，因此调试一个 justfile 比调试一个 markfile 文件更容易，也更少惊吓。
 
-如果你需要帮助`just`，请随时打开一个问题或让我知道[gitter](https://gitter.im/just-because/Lobby). 始终欢迎功能请求和错误报告!
+如果你需要帮助`just`，请随时打开一个问题或让我知道[gitter](https://gitter.im/just-because/Lobby)。 始终欢迎功能请求和错误报告!
 
 ## 使用手册
 
 ## 安装
 
-`just`应该能在合理`sh`的任何系统上运行，包括 Linux、MACOS 和 BSD.
+`just`应该能在，具有合理`sh`的任何系统上运行，包括 Linux、MACOS 和 BSD。
 
-在 Windows 上,`just`能与由[Git for Windows](https://git-scm.com),[GitHub Desktop](https://desktop.github.com)和[Cygwin](http://www.cygwin.com)提供的`sh`一起工作。
+在 Windows 上，`just`能与由[Git for Windows](https://git-scm.com)，[GitHub Desktop](https://desktop.github.com)和[Cygwin](http://www.cygwin.com)提供的`sh`一起工作。
 
 ### 预先构建的 二进制文件
 
-Linux、MacOS 和 Windows 的预构建二进制文件在[ releases 页面](https://github.com/casey/just/releases)。
+Linux、MacOS 和 Windows 的预构建二进制文件，在[releases 页面](https://github.com/casey/just/releases)。
 
-您可以使用以下命令，下载 Mac OS 或 Windows 的最新二进制文件,只需替换`DESTINATION_DIRECTORY`成你想放置`just`的目录:
+您可以使用以下命令，下载 Mac OS 或 Windows 的最新二进制文件，只需将`DESTINATION_DIRECTORY`替换成你想放置`just`的目录:
 
 ```sh
 curl -LSfs https://japaric.github.io/trust/install.sh | \
   sh -s -- --git casey/just --to DESTINATION_DIRECTORY
 ```
 
-在 Linux 上,使用:
+在 Linux 上，使用:
 
 ```sh
 curl -LSfs https://japaric.github.io/trust/install.sh | \
@@ -163,7 +176,7 @@ curl -LSfs https://japaric.github.io/trust/install.sh | \
 
 ### Homebrew
 
-关于 MacOS,`just`可以使用[Homebrew 包管理器](https://brew.sh)安装。 若还没有 Homebrew 可使用[这里](https://brew.sh)指令安装然后运行:
+关于 MacOS,`just`可以使用[Homebrew 包管理器](https://brew.sh)安装。 若还没有 Homebrew 可使用[这里](https://brew.sh)的命令安装，然后运行:
 
 ```
 brew install just
@@ -171,13 +184,39 @@ brew install just
 
 ### Scoop
 
-在 Windows 上,`just`可以使用[Scoop 包管理器](https://scoop.sh)安装。 若还没有 Scoop 可使用[这里](https://scoop.sh/)指令安装然后运行:
+在 Windows 上,`just`可以使用[Scoop 包管理器](https://scoop.sh)安装。 若还没有 Scoop 可使用[这里](https://scoop.sh/)的指令安装，然后运行:
 
 ```powershell
 scoop install just
 ```
 
-### Cargo
+## Arch Linux
+
+在 Arch Linux, `just`  作为 AUR包
+[just](https://aur.archlinux.org/packages/just/),  [Arch User
+Repository](https://aur.archlinux.org)。几个可以从 AUR 下载包的工具, 包括 [yay](https://github.com/Jguer/yay)
+和 [yaourt](https://github.com/archlinuxfr/yaourt).
+
+## Void Linux
+
+在 Void Linux, `just` can be installed with:
+
+```sh
+sudo xbps-install -S just
+```
+
+## Nix
+
+On NixOS, Linux, and MacOS, `just` 的安装，可使用[Nix
+package manager](https://nixos.org/nix/). Install
+[Nix](https://nixos.org/nix/download.html) or
+[NixOS](https://nixos.org/nixos/download.html), then run:
+
+```sh
+nix-env -i just
+```
+
+## Cargo
 
 在 Windows、Linux 和 MACOS 上,`just`可使用 Cargo 安装, 它是[rust 语言 包管理器](https://www.rust-lang.org). 可使用[这里](https://www.rustup.rs)的说明书安装 Cargo，然后运行:
 
@@ -185,11 +224,11 @@ scoop install just
 cargo install just
 ```
 
-(您可能还需要添加`~/.cargo/bin`到你的`$PATH`。 如果安装后不能运行,请在 shell 配置文件中运行`export PATH="$HOME/.cargo/bin:$PATH"`)或环境变量的设置
+(您可能还需要添加`~/.cargo/bin`到你的`$PATH`。 如果安装后不能运行，请在 shell 配置文件中运行`export PATH="$HOME/.cargo/bin:$PATH"`)
 
-## 让我们快速开始
+# 让我们快速开始
 
-在[安装](#_installation)章节中安装了`just`后。试运行`just --version`确保安装正确.
+在[安装](#安装)章节中安装了`just`后。试运行`just --version`确保安装正确.
 
 一旦`just`成功安装和工作, 在项目的根目录中，创建一个名为`justfile`的文件，具有以下内容:
 
@@ -203,7 +242,7 @@ another-recipe:
     @echo 'This is another recipe.'
 ```
 
-当你调用`just`，它会在当前目录和向上层目录，寻找一个`justfile`,因此您可以在项目的任何子目录调用它(它就是那么方便)。
+当你调用`just`，它会在当前目录和向上层目录，寻找一个`justfile`，因此您可以在项目的任何子目录调用它(它就是那么方便)。
 
 若在没有参数的情况下运行`just`，那当你选择运行`justfile`的第一个配方(`recipe`/或者叫‘食谱’也行，反正听上去都好吃):
 
@@ -220,9 +259,9 @@ $ just another-recipe
 This is another recipe.
 ```
 
-`just`会在运行真正命令之前,将每个命令打印到标准错误(stderr)，这就是为什么`echo 'This is a recipe!'`会被打印。当然你可以使用`@`作为行开头，这样会抑制打印。`echo 'Another recipe.'`也就没有打印。
+`just`会在运行真正命令之前，将每个命令打印到标准错误(stderr)，这就是为什么`echo 'This is a recipe!'`会被打印。当然你可以使用`@`作为行开头，这样会抑制打印。`echo 'Another recipe.'`也就没有打印。
 
-如果命令失败,配方将停止运行。下面的`cargo publish`只在`cargo test`成功后运行:
+如果命令失败，配方将停止运行。下面的`cargo publish`只在`cargo test`成功后运行:
 
 ```make
 publish:
@@ -231,7 +270,7 @@ publish:
     cargo publish
 ```
 
-配方可以依赖其他配方。这里`test`配方依赖`build`配方,所以`build`会在`test`之前运行:
+配方可以依赖其他配方。这里`test`配方依赖`build`配方，所以`build`会在`test`之前运行:
 
 ```make
 build:
@@ -259,7 +298,7 @@ cc main.c foo.c bar.c -o main
 1337 lines of code
 ```
 
-依赖关系，总是先运行,即使它们(`build`)在依赖于它们的配方(`test`)之后传递:
+依赖关系，总是先运行，即使它们(`build`)在依赖于它们的配方(`test`)之后传递:
 
 ```sh
 $ just test build
@@ -290,6 +329,24 @@ $ just --summary
 build test deploy lint
 ```
 
+## Aliases
+
+Aliases 让配方拥有替代名称:
+
+```make
+alias b := build
+
+build:
+  echo 'Building!'
+```
+
+```sh
+$ just b
+build
+echo 'Building!'
+Building!
+```
+
 ### 文档注释
 
 `just --list`会让配方之前的相近注释，出现:
@@ -314,12 +371,12 @@ Available recipes:
 
 ### 变量和替代
 
-变量、字符串、级联和替换，都通过使用`{{…​}}`支持:
+变量、字符串、concatenation 和 substitution ，都通过使用`{{…​}}`支持:
 
 ```make
-version # "0.2.7"
-tardir  # "awesomesauce-" + version
-tarball # tardir + ".tar.gz"
+version := "0.2.7"
+tardir  := "awesomesauce-" + version
+tarball := tardir + ".tar.gz"
 
 publish:
     rm -f {{tarball}}
@@ -352,30 +409,31 @@ braces:
 
 双引号字符串支持转义序列:
 
+
 ```make
-string-with-tab             # "\t"
-string-with-newline         # "\n"
-string-with-carriage-return # "\r"
-string-with-double-quote    # "\""
-string-with-slash           # "\\"
+string-with-tab             := "\t"
+string-with-newline         := "\n"
+string-with-carriage-return := "\r"
+string-with-double-quote    := "\""
+string-with-slash           := "\\"
 ```
 
 ```sh
 $ just --evaluate
-"tring-with-carriage-return # "
-string-with-double-quote    # """
-string-with-newline         # "
+"tring-with-carriage-return := "
+string-with-double-quote    := """
+string-with-newline         := "
 "
-string-with-slash           # "\"
-string-with-tab             # "     "
+string-with-slash           := "\"
+string-with-tab             := "     "
 ```
 
 单引号字符串不识别转义序列,可能包含空格行:
 
 ```make
-escapes # '\t\n\r\"\\'
+escapes := '\t\n\r\"\\'
 
-line-breaks # 'hello
+line-breaks := 'hello
 this
 is
   a
@@ -386,9 +444,9 @@ string!
 
 ```sh
 $ just --evaluate
-escapes # "\t\n\r\"\\"
+escapes := "\t\n\r\"\\"
 
-line-breaks # "hello
+line-breaks := "hello
 this
 is
   a
@@ -399,13 +457,13 @@ string!
 
 ### 函数
 
-只提供一些内置函数,在编写配方时可能有用.
+只提供一些内置函数，在编写配方时可能有用.
 
 #### 系统信息
 
-- `arch()`- 系统指令体系结构，可能的值是:`"aarch64"`,`"arm"`,`"asmjs"`,`"hexagon"`,`"mips"`,`"msp430"`,`"powerpc"`,`"powerpc64"`,`"s390x"`,`"sparc"`,`"wasm32"`,`"x86"`,`"x86_64"`和`"xcore"`.
+- `arch()` - 系统指令体系结构，可能的值是:`"aarch64"`,`"arm"`,`"asmjs"`,`"hexagon"`,`"mips"`,`"msp430"`,`"powerpc"`,`"powerpc64"`,`"s390x"`,`"sparc"`,`"wasm32"`,`"x86"`,`"x86_64"`和`"xcore"`.
 
-- `os()`- 操作系统，可能的值是:`"android"`,`"bitrig"`,`"dragonfly"`,`"emscripten"`,`"freebsd"`,`"haiku"`,`"ios"`,`"linux"`,`"macos"`,`"netbsd"`,`"openbsd"`,`"solaris"`和`"windows"`.
+- `os()` - 操作系统，可能的值是:`"android"`,`"bitrig"`,`"dragonfly"`,`"emscripten"`,`"freebsd"`,`"haiku"`,`"ios"`,`"linux"`,`"macos"`,`"netbsd"`,`"openbsd"`,`"solaris"`和`"windows"`.
 
 - `os_family()`操作系统家族; 可能的价值是:`"unix"`和`"windows"`.
 
@@ -423,22 +481,22 @@ This is an x86_64 machine
 
 #### 环境变量
 
-- `env_var(key)`-用名称`key`检索环境变量，如果不存在会中止.
+- `env_var(key)` - 用名称`key`检索环境变量，如果不存在会中止.
 
-- `env_var_or_default(key, default)`-用名称`key`检索环境变量，如果它不存在则返回`default`值.
+- `env_var_or_default(key, default)` - 用名称`key`检索环境变量，如果它不存在则返回`default`值.
 
 #### 调用 目录
 
 - `invocation_directory()` - 检索当前工作目录的路径, 在`just`执行命令更改它(用 chdir)之前。
 
-例如,调用`rustfmt`只作用于"当前目录"下的文件(从用户/调用方的角度),使用以下规则:
+例如，调用`rustfmt`只作用于"当前目录"下的文件(从用户/调用方的角度)，使用以下规则:
 
 ```
 rustfmt:
     find {{invocation_directory()}} -name \*.rs -exec rustfmt {} \;
 ```
 
-或者,如果您的命令需要从当前目录运行,您可以使用(例如):
+或者，如果您的命令需要从当前目录运行，您可以使用(例如):
 
 ```
 build:
@@ -478,7 +536,7 @@ Starting server with database localhost:6379 on port 1337...
 反引号可用来存储命令的结果:
 
 ```make
-localhost = `dumpinterfaces | cut -d: -f2 | sed 's/\/.*//' | sed 's/ //g'`
+localhost := `dumpinterfaces | cut -d: -f2 | sed 's/\/.*//' | sed 's/ //g'`
 
 serve:
     ./serve {{localhost}} 8080
@@ -489,7 +547,7 @@ serve:
 变量可以通过命令行重写.
 
 ```make
-os # "linux"
+os := "linux"
 
 test: build
     ./test --test {{os}}
@@ -512,7 +570,7 @@ $ just os=plan9
 ./test --test plan9
 ```
 
-或者你可以使用`--set`:
+或者你可以使用` --set`:
 
 ```sh
 $ just --set os bsd
@@ -525,7 +583,7 @@ $ just --set os bsd
 `export`关键字会将作为环境变量，导入到配方中:
 
 ```make
-export RUST_BACKTRACE # "1"
+export RUST_BACKTRACE := "1"
 
 test:
     # will print a stack trace if it crashes
@@ -554,8 +612,11 @@ cd my-awesome-project && make
 
 参数也可具有默认值:
 
+
 ```make
-test target tests='all':
+default := 'all'
+
+test target tests=default:
     @echo 'Testing {{target}}:{{tests}}...'
     ./test --tests {{tests}} {{target}}
 ```
@@ -576,6 +637,15 @@ Testing server:unit...
 ./test --tests unit server
 ```
 
+默认值可以是任意表达式，但 concatenations 必须被圆括号包裹:
+
+```make
+arch := "wasm"
+
+test triple=(arch + "-unknown-unknown"):
+  ./test {{triple}}
+```
+
 配方的最后一个参数可以是变量。这在参数名称之前，用`+`表示:
 
 ```make
@@ -583,7 +653,7 @@ backup +FILES:
   scp {{FILES}} me@server.com:
 ```
 
-变量参数接受一个或多个参数,并由包含空格分隔的参数字符串，扩展:
+变量参数接受一个或多个参数，并由包含空格分隔的参数字符串，扩展:
 
 ```sh
 $ just backup FAQ.md GRAMMAR.md
@@ -612,7 +682,7 @@ search QUERY:
 $ just search "cat toupee"
 ```
 
-`Just`会运行命令`lynx [https://www.google.com/?q=cat](https://www.google.com/?q=cat) toupee`，将被`sh`解析为`lynx`,`[https://www.google.com/?q=cat](https://www.google.com/?q=cat)`和`toupee`，而不是你想的`lynx`和`[https://www.google.com/?q=cat](https://www.google.com/?q=cat) toupee`.
+`Just`会运行命令`lynx [https://www.google.com/?q=cat](https://www.google.com/?q=cat) toupee`，将被`sh`解析为`lynx`,`[https://www.google.com/?q=cat](https://www.google.com/?q=cat)`和`toupee`，而不是你想的`lynx`和`[https://www.google.com/?q=cat](https://www.google.com/?q=cat) toupee`。
 
 你可以通过添加引号来修正这个问题:
 
@@ -625,7 +695,7 @@ search QUERY:
 
 ### 用其他语言来写配方
 
-以一个`#!`开始的配方会作为脚本执行,所以你可以用其他语言编写:
+以一个`#!`开始的配方会作为脚本执行，所以你可以用其他语言编写:
 
 ```make
 polyglot: python js perl sh ruby
@@ -661,6 +731,100 @@ Yo from a shell script!
 Hello from ruby!
 ```
 
+
+## 多行结构语句
+
+配方没有执行一个初始 shebang，并且是一行一行运行的。这意味着，多行结构语句的运行，可能不是你想的那样。
+
+例如, 下面的 justfile:
+
+```
+    conditional:
+        if true; then
+            echo 'True!'
+        fi
+```
+
+`conditional`语句下的缩进空格，
+会给出解析错误:
+
+```
+    $ just conditional
+    error: Recipe line has extra leading whitespace
+      |
+    3 |         echo 'True!'
+      |     ^^^^^^^^^^^^^^^^
+```
+
+要使这个工作，你要把条件语句放在同一行，用`\`转为新行，或是添加一个 shebang 到你的配方中。下面有些参考。
+
+### `if` statements
+
+```make
+conditional:
+    if true; then echo 'True!'; fi
+```
+
+```make
+conditional:
+    if true; then \
+        echo 'True!'; \
+    fi
+```
+
+```make
+conditional:
+    #!/usr/bin/env sh
+    if true; then
+        echo 'True!'
+    fi
+```
+
+### `for` loops
+
+```make
+for:
+    for file in `ls .`; do echo $file; done
+```
+
+```make
+for:
+    for file in `ls .`; do \
+        echo $file; \
+    done
+```
+
+```make
+for:
+    #!/usr/bin/env sh
+    for file in `ls .`; do
+        echo $file
+    done
+```
+
+### `while` loops
+
+```make
+while:
+    while `server-is-dead`; do ping -c 1 server; done
+```
+
+```make
+while:
+    while `server-is-dead`; do \
+        ping -c 1 server; \
+    done
+```
+
+```make
+while:
+    #!/usr/bin/env sh
+    while `server-is-dead`; do
+        do ping -c 1 server
+    done
+```
+
+
 ### 命令行选项
 
 `just`支持许多有用的命令行选项,用于列表，倒腾和调试配方和变量:
@@ -685,7 +849,7 @@ polyglot: python js perl sh ruby
 
 ### 私有配方
 
-名称以一个`_`开头的配方，`just --list`会省略:
+名称以一个`_`开头的配方和 aliases，`just --list`会省略:
 
 ```make
 test: _test-helper
@@ -736,13 +900,13 @@ goodbye
 
 1.  参数以最后一个`/`，拆分.
 
-2.  拆分后的，前半部分被视为目录。`just`会开始在那里搜索 justfile,而不是在当前目录中搜索.
+2.  拆分后的，前半部分被视为目录。`just`会开始在那里搜索 justfile，而不是在当前目录中搜索。
 
-3.  后部分被当作一个普通的参数,或者，若它是空的，则被忽略.
+3.  后部分被当作一个普通的参数，或者，若它是空的，则被忽略。
 
-这看起来有点奇怪,但是如果您希望运行子目录中的 justfile 中的命令,这是很有用的.
+这看起来有点奇怪，但是如果您希望运行子目录中的 justfile 中的命令，这是很有用的。
 
-例如,如果您在包含名为`foo`子目录,其中包含一个带有`build`(也是默认配方)配方的 justfile,以下每条命令都是相等的:
+例如，如果您在包含名为`foo`子目录，其中包含一个带有`build`(也是默认配方)配方的 justfile，以下每条命令都是相等的:
 
 ```sh
 $ (cd foo && just build)
@@ -750,39 +914,28 @@ $ just foo/build
 $ just foo/
 ```
 
-## FAQ
 
-### make 的什么特性，just 避免了？
+## Just 脚本
 
-make 有一些混淆或复杂的行为,或者说，使它不适合用作一般的命令运行器.
-
-一个例子是,有时 make 不会在配方中运行命令。例如,如果有一个文件叫`test`，例子如下且运行它:
-
-```make
-test:
-  ./test
-```
-
-Make 实际上，会拒绝运行它:
+通过添加一个 shebang 到一个 justfile 文件的顶部，就能让它可执行化。`just` 就作为了脚本执行器:
 
 ```sh
-$ make test
-make: `test' is up to date.
+$ cat > script <<EOF
+#!/usr/bin/env just --justfile
+
+foo:
+  echo foo
+EOF
+$ chmod +x script
+$ ./script foo
+echo foo
+foo
 ```
 
-Make 发觉这个`test`配方，并假定它产生一个名为`test`的文件。 然后, 该文件已存在,因此假定配方不需要运行。
+若一个执行脚本带有一个 shebang, 系统会提供一个脚本的路径，作为命令参数。 所以，`#!/usr/bin/env just --justfile`, 这个命令完整是
+`/usr/bin/env just --justfile PATH_TO_SCRIPT`。
 
-公平地说,当使用 make 作为构建系统时，这种行为是可取的,但是当使用它作为命令运行程序时,则不是那么回事。
-
-其他一些例子，包括必须理解`=`和`:=`赋值两者之间的区别，如果您(搞混)弄乱了 makefile, 混乱的错误消息就会，哼!。不得不使用`$$`编写使用环境变量的配方,以及不同口味的配方之间的不相容性.
-
-### just 和 cargo build 脚本有一腿吗?
-
-[Cargo build 脚本](http://doc.crates.io/build-script.html)有一个非常具体的用途,这是控制 Cargo , 正确建立你的 Rust 项目。这可能包括将命令行参数添加到`rustc`中调用,建立外部依赖,或运行某种代码生成步骤.
-
-`just`，则控制另一方面,是开发过程中部分，需要运行的所有其他杂项命令。比如在不同的配置中运行测试、链接代码、将构建工件推送到服务器、删除临时文件等等.
-
-而且,虽然`just`写于 Rust 语言,但它可以被使用在许多地方,而不在意你的项目使用的语言或构建系统.
+使用上面的 shebang, `just` 会将工作目录改为脚本所在的目录。 如果不想改变工作目录, 使用 `#!/usr/bin/env just --working-directory . --justfile`。
 
 ## 杂记(炸鸡?)
 
@@ -796,7 +949,7 @@ Make 发觉这个`test`配方，并假定它产生一个名为`test`的文件。
 
 ### Shell Alias(别名)
 
-为了闪电般的命令运行,把`alias j=just`放在 shell 的配置文件中.
+为了闪电般的命令运行，把`alias j=just`放在 shell 的配置文件中.
 
 ### 语法 高亮
 
@@ -851,17 +1004,17 @@ justfile 的非规范语法可以在[GRAMMAR.md](GRAMMAR.zh.md).
 
 ### just.sh
 
-以前的`just`是一个花哨的 Rust 程序,它是一个小小的 shell 脚本,其调用`make`. 您可以在中[extras/just.sh](extras/just.sh)找到旧版本。
+以前的`just`是一个花哨的 Rust 程序，它是一个小小的 shell 脚本，其调用`make`. 您可以在[extras/just.sh](extras/just.sh)中找到旧版本。
 
 ### 无定向项目的 Justfile
 
-如果你想要一些命令在任何地方都可用,把它们放进去.`~/.justfile`，并将下列内容添加到 shell 初始化文件中:
+如果你想要一些命令在任何地方都可用，把它们放进去.`~/.justfile`，并将下列内容添加到 shell 初始化文件中:
 
 ```sh
 alias .j='just --justfile ~/.justfile --working-directory ~'
 ```
 
-或者,如果你宁愿他们运行在当前目录:
+或者，如果你宁愿他们运行在当前目录:
 
 ```sh
 alias .j='just --justfile ~/.justfile --working-directory .'
@@ -870,6 +1023,47 @@ alias .j='just --justfile ~/.justfile --working-directory .'
 我敢肯定没有人真正使用这个功能,但它在那里.
 
 ¯\\\_(ツ)\_/¯
+
+
+## Janus
+
+[Janus](https://github.com/casey/janus) 是收集和分析 justfiles 的工具，并确定新版 `just` 更新与变化，对现有 justfiles 的解析。
+
+在合并一个格外大的变更之前, 要运行 Janus 确保没有破坏。 不要担心 Janus 的运行有多麻烦, Casey(原作者) 会为你，在需要它时，对变更运行 Janus。
+
+## FAQ
+
+### make 的什么不良癖好，just 避免了？
+
+make 有一些混淆或复杂的行为，或者说，使它不适合用作一般的命令运行器.
+
+一个例子是，有时 make 不会在配方中运行命令。例如，如果有一个文件叫`test`，例子如下且运行它:
+
+```make
+test:
+  ./test
+```
+
+Make 实际上，会拒绝运行它:
+
+```sh
+$ make test
+make: `test' is up to date.
+```
+
+Make 发觉这个`test`配方，并假定它产生一个名为`test`的文件。 然后， 该文件已存在，因此假定配方不需要运行。
+
+公平地说，当使用 make 作为构建系统时，这种行为是可取的，但是当使用它作为命令运行程序时，则不是那么回事。
+
+其他一些例子，包括必须理解`=`和`:=`赋值两者之间的区别；弄乱 makefile 的话，产生混乱的错误消息；不得不通过`$$`，在配方中使用环境变量；以及 Make 不同风格的配方之间的不相容性。
+
+### just 和 cargo build 脚本有一腿吗?
+
+[Cargo build 脚本](http://doc.crates.io/build-script.html)有一个非常具体的用途，这是控制 Cargo ， 正确建立你的 Rust 项目。这可能包括将命令行参数添加到`rustc`中调用，建立外部依赖，或运行某种代码生成步骤.
+
+`just`，则控制另一方面，是开发过程中部分，需要运行的所有其他杂项命令。比如在不同的配置中运行测试、链接代码、将构建工件推送到服务器、删除临时文件等等.
+
+而且，虽然`just`写于 Rust 语言，但它可以被使用在许多地方，而不在意你的项目使用的语言或构建系统.
 
 ## 进一步漫谈
 
@@ -895,11 +1089,11 @@ alias .j='just --justfile ~/.justfile --working-directory .'
 
 - 运行不同的测试集,例如快速测试和完整测试,或者用详细的输出来运行它们.
 
-- 任何复杂的命令集,如果只是为了能够记得它们,你就应该写在某个地方(当然是 justfile 啦).
+- 任何复杂的命令集，如果只是为了能够记得它们，你就应该写在某个地方(当然是 justfile 啦).
 
-即使对于小型的个人项目,能够按名称记住命令也是很好的，而不是`^反向搜索` shell 历史记录。也许在神秘(莫名其妙)的构建系统，使用未知语言编写的旧项目, 若是使用`just`，那`justfile`可是会知道您需要执行，还是想要的所有命令,这对于您来说是巨大的好处。如果你输入`just`可能会发生一些有用(或至少有趣!)的事情.
+即使对于小型的个人项目，能够按名称记住命令也是很好的，而不是`^反向搜索` shell 历史记录。也许在神秘(莫名其妙)的构建系统，使用未知语言编写的旧项目， 若是使用`just`，那`justfile`可是会知道您需要执行，还是想要的所有命令，这对于您来说是巨大的好处。如果你输入`just`可能会发生一些有用(或至少有趣!)的事情.
 
-有关配方的建议,请查看[这个项目的`justfile`](justfile)或者一些`justfile`[野花](https://github.com/search?utf8=%E2%9C%93&q=filename%3Ajustfile).
+有关配方的建议，请查看[这个项目的`justfile`](https://github.com/casey/just/blob/master/justfile)或者一些`justfile`[野花](https://github.com/search?utf8=%E2%9C%93&q=filename%3Ajustfile).
 
 无论如何,这是我认为的赞，且详细的 README 文件.
 
